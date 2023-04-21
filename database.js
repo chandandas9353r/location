@@ -18,18 +18,20 @@ const locationdB = ref(database,'loc')
 export function storedB(date, coordinate, i){
     onValue(ref(database,'loc/'+date), function(snapshot){
         if(snapshot.val() != null){
-            Object.values(snapshot.val()).forEach(element => {
-                if(Object.values(element)[0] != coordinate){
-                    set(ref(database, 'loc/'+date+"/"+i), {
-                        coordinate
-                    });
-                }
-            });
+            let today = Object.values(snapshot.val())
+            let attendance = Object.values(today[today.length-1]).toString()
+            if(attendance != coordinate){
+                set(ref(database, 'loc/'+date+"/"+i), {
+                    coordinate
+                });
+                console.log(coordinate,"pushed")
+            }
         }
         else{
             set(ref(database, 'loc/'+date+"/"+i), {
                 coordinate
             });
+            console.log(coordinate,"pushed")
         }
     })
 }
