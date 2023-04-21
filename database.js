@@ -27,5 +27,8 @@ export function storedB(date, coordinate, time){
                 }
             });
         }
+        set(ref(database, 'loc/'+date+"/"+time), {
+            coordinate
+        });
     })
 }
