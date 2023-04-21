@@ -17,7 +17,7 @@ navigator.geolocation.getCurrentPosition(function(position){
     let longitude = document.createElement('li')
     longitude.textContent = "Longitude: "+position.coords.longitude
     list.append(longitude)
-    storedB('coordinate'+currentTime,latitude.innerText.slice(10).trim()+" "+longitude.innerText.slice(10).trim())
+    storedB(currentDate,latitude.innerText.slice(10).trim()+" "+longitude.innerText.slice(10).trim(),currentTime)
 })
 
 let date = new Date().getDate().toString()
@@ -31,4 +31,5 @@ minute = (minute/10 < 1) ? ('0'+minute).toString() : minute.toString()
 let second = new Date().getSeconds().toString()
 second = (second/10 < 1) ? ('0'+second).toString() : second.toString()
 
-let currentTime = date+month+year+"_"+hour+minute+second
+let currentDate = date+month+year
+let currentTime = hour+minute+second
