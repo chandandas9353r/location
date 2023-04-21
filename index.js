@@ -20,15 +20,15 @@ navigator.geolocation.watchPosition(function(position){
     storedB(currentDate,latitude.innerText.slice(10).trim()+" "+longitude.innerText.slice(10).trim(),currentTime)
 })
 
-let date = new Date().getDate().toString()
-let month = new Date().getMonth()+1
+let date = new Date().getUTCDate().toString()
+let month = new Date().getUTCMonth()+1
 month = (month/10 < 1) ? ('0'+month).toString() : month.toString()
-let year = new Date().getFullYear().toString()
-let hour = new Date().getHours().toString()
+let year = new Date().getUTCFullYear().toString()
+let hour = new Date().getUTCHours().toString()
 hour = (hour/10 < 1) ? ('0'+hour).toString() : hour.toString()
-let minute = new Date().getMinutes().toString()
+let minute = new Date().getUTCMinutes().toString()
 minute = (minute/10 < 1) ? ('0'+minute).toString() : minute.toString()
-let second = new Date().getSeconds().toString()
+let second = new Date().getUTCSeconds().toString()
 second = (second/10 < 1) ? ('0'+second).toString() : second.toString()
 
 let currentDate = date+month+year
