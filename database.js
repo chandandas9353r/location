@@ -15,20 +15,21 @@ const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const locationdB = ref(database,'loc')
 
-export function storedB(date, coordinate, time){
+export function storedB(date, coordinate, i){
     onValue(ref(database,'loc/'+date), function(snapshot){
-        if(snapshot != null){
+        if(snapshot.val() != null){
             Object.values(snapshot.val()).forEach(element => {
                 if(Object.values(element)[0] != coordinate){
-                    set(ref(database, 'loc/'+date+"/"+time), {
+                    set(ref(database, 'loc/'+date+"/"+i), {
                         coordinate
                     });
-                    console.log(coordinate,"pushed")
                 }
             });
         }
+        else{
+            set(ref(database, 'loc/'+date+"/"+i), {
+                coordinate
+            });
+        }
     })
-    set(ref(database, 'loc/'+date+"/"+time), {
-        coordinate
-    });
 }
