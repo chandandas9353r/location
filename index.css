@@ -9,7 +9,7 @@ ul{
     font-size: 2rem;
     gap: 10px;
     flex-direction: column;
-    max-width: fit-content;
+    max-width: 100%;
 }
 ul li{
     background-color: pink;

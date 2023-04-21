@@ -7,14 +7,10 @@ function startApp(){
     text = "Height: "+deviceHeight+"px"
     list.innerHTML += '<li>'+text+'</li>'
 
-    if(navigator.geolocation){
-        var position = navigator.geolocation.watchPosition(showPosition)
-    }else alert("Location permission required")
-}
-function showPosition(position){
-    let list = document.getElementById('items')
-    let latitude = "Latitude: "+position.coords.latitude
-    let longitude = "Longitude: "+position.coords.longitude
-    list.innerHTML += '<li>'+latitude+'</li>'
-    list.innerHTML += '<li>'+longitude+'</li>'
+    var position = navigator.geolocation.watchPosition(function(position){
+        let latitude = "Latitude: "+position.coords.latitude
+        let longitude = "Longitude: "+position.coords.longitude
+        list.innerHTML += '<li>'+latitude+'</li>'
+        list.innerHTML += '<li>'+longitude+'</li>'
+    })
 }
