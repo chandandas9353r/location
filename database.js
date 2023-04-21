@@ -15,11 +15,13 @@ const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const locationdB = ref(database,'loc')
 
-export function storedB(loc, coordinate){
-    onValue(locationdB, function(snapshot){
-        console.log(Object.entries(snapshot.val()))
-    })
+export function storedB(locator, coordinate){
+    // onValue(locationdB, function(snapshot){
+    //     console.log(Object.entries(snapshot.val()))
+    // })
     // push(ref(database,'loc/'+loc),coordinate)
-    set(ref(database,'loc/'+loc),coordinate)
+    set(ref(database, 'loc/'), {
+        locator,coordinate
+      });
     console.log(coordinate,"pushed")
 }
