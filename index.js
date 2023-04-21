@@ -1,16 +1,22 @@
-function startApp(){
-    let deviceWidth = window.innerWidth, deviceHeight = window.innerHeight
-    
-    let list = document.getElementById('items')
-    let text = "Width: "+deviceWidth+"px"
-    list.innerHTML = '<li>'+text+'</li>'
-    text = "Height: "+deviceHeight+"px"
-    list.innerHTML += '<li>'+text+'</li>'
+import { storedB } from './database.js'
 
-    var position = navigator.geolocation.watchPosition(function(position){
-        let latitude = "Latitude: "+position.coords.latitude
-        let longitude = "Longitude: "+position.coords.longitude
-        list.innerHTML += '<li>'+latitude+'</li>'
-        list.innerHTML += '<li>'+longitude+'</li>'
-    })
-}
+let deviceWidth = window.innerWidth, deviceHeight = window.innerHeight
+let list = document.getElementById('items')
+
+let item = document.createElement('li')
+item.textContent = "Width: "+deviceWidth+"px"
+list.append(item)
+item = document.createElement('li')
+item.textContent = "Height: "+deviceHeight+"px"
+list.append(item)
+
+navigator.geolocation.watchPosition(function(position){
+    let latitude = document.createElement('li')
+    latitude.textContent = "Latitude: "+position.coords.latitude
+    list.append(latitude)
+    storedB("lat",latitude.innerHTML)
+    let longitude = document.createElement('li')
+    longitude.textContent = "Longitude: "+position.coords.longitude
+    list.append(longitude)
+    storedB("lng",longitude.innerHTML)
+})
