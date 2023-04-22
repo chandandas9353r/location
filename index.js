@@ -24,12 +24,14 @@ item.textContent = "Starting at: "+cTime.toLocaleTimeString()
 list.append(item)
 let fTime = new Date(cTime.getTime()+60*1000).toLocaleTimeString()
 console.log(fTime)
-var repeat = window.setInterval(getLocation, 10000);
 
-function getLocation(){
-    
-    if(new Date().toLocaleTimeString() == fTime){
-        item = document.createElement('li')
+getLocation()
+var repeat = window.setInterval(checkTime, 10000);
+
+function checkTime(){
+
+    if(new Date().toLocaleTimeString() >= fTime){
+        let item = document.createElement('li')
         item.textContent = "Stopped at: "+fTime
         list.append(item)
         window.clearInterval(repeat)
@@ -38,6 +40,12 @@ function getLocation(){
         return
     }
     
+    getLocation()
+
+}
+
+function getLocation(){
+
     const options = {enableHighAccuracy: true};
 
     let date = new Date().getDate().toString()
@@ -57,6 +65,9 @@ function getLocation(){
     let currentTime = hour+minute+second
 
     navigator.geolocation.getCurrentPosition(function(position){
+        let item = document.createElement('li')
+        item.textContent = new Date().toLocaleTimeString()
+        list.append(item)
         let accuracy = document.createElement('li')
         accuracy.textContent = i+") Accuracy: "+position.coords.accuracy
         list.append(accuracy)
