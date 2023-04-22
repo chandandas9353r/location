@@ -15,23 +15,33 @@ const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const locationdB = ref(database,'loc')
 
-export function storedB(date, coordinate, i){
-    onValue(ref(database,'loc/'+date), function(snapshot){
-        if(snapshot.val() != null){
-            let today = Object.values(snapshot.val())
-            let attendance = Object.values(today[today.length-1]).toString()
-            if(attendance != coordinate){
-                set(ref(database, 'loc/'+date+"/"+i), {
-                    coordinate
-                });
-                console.log(coordinate,"pushed")
-            }
-        }
-        else{
-            set(ref(database, 'loc/'+date+"/"+i), {
-                coordinate
-            });
-            console.log(coordinate,"pushed")
+export function storedB(date, latitude, longitude, time){
+    onValue(ref(database), function(snapshot){
+        console.log(snapshot.val())
+        if(snapshot.val() == null){
+            set(ref(database,'loc/'+date+'/'+time), {
+                latitude,longitude
+            })
         }
     })
+    // onValue(ref(database,'loc/'+date), function(snapshot){
+    //     console.log(snapshot.val(),time)
+    //     if(snapshot.val() == null){
+    //         set(ref(database, 'loc/'+date+"/"+time), {
+    //             latitude: latitude,
+    //             longitude: longitude
+    //         });
+    //         console.log({latitude,longitude},"pushed first time")
+    //         return
+    //     }
+    //     // let today = Object.values(snapshot.val())
+    //     // let attendance = Object.values(today[today.length-1]).toString()
+    //     // if(attendance != coordinate){
+    //         set(ref(database, 'loc/'+date+"/"+time), {
+    //             latitude: latitude,
+    //             longitude: longitude
+    //         });
+    //         console.log({latitude,longitude},"pushed because location not same")
+    //     // }
+    // })
 }
