@@ -64,6 +64,8 @@ function getLocation(){
     
     let currentTime = hour+minute+second
 
+    let radius = 6378137, dn = 10, de = 10
+
     navigator.geolocation.getCurrentPosition(function(position){
         let item = document.createElement('li')
         item.textContent = new Date().toLocaleTimeString()
@@ -72,10 +74,10 @@ function getLocation(){
         accuracy.textContent = i+") Accuracy: "+position.coords.accuracy
         list.append(accuracy)
         let latitude = document.createElement('li')
-        latitude.textContent = i+") Latitude: "+position.coords.latitude
+        latitude.textContent = i+") Latitude: "+(position.coords.latitude+dn/radius*180/Math.PI)
         list.append(latitude)
         let longitude = document.createElement('li')
-        longitude.textContent = i+") Longitude: "+position.coords.longitude
+        longitude.textContent = i+") Longitude: "+(position.coords.longitude+de/(radius*Math.cosh(Math.PI*position.coords.latitude*180))*180/Math.PI)
         list.append(longitude)
         storedB(currentDate,latitude.innerText.slice(10).trim(),longitude.innerText.slice(10).trim(),currentTime)
         i++
