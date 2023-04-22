@@ -55,6 +55,9 @@ function getLocation(){
     let currentTime = hour+minute+second
 
     navigator.geolocation.getCurrentPosition(function(position){
+        let accuracy = document.createElement('li')
+        accuracy.textContent = i+") Accuracy: "+position.coords.accuracy
+        list.append(accuracy)
         let latitude = document.createElement('li')
         latitude.textContent = i+") Latitude: "+position.coords.latitude
         list.append(latitude)
