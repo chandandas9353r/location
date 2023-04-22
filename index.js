@@ -1,6 +1,12 @@
 import { storedB } from './database.js'
 
-let deviceWidth = window.innerWidth, deviceHeight = window.innerHeight
+navigator.permissions.query({name: 'geolocation'}).then((result) => {
+    let item = document.createElement('li')
+    item.textContent = "Location "+result.state.toUpperCase()
+    list.append(item)
+})
+
+let deviceWidth = window.outerWidth, deviceHeight = window.outerHeight
 let list = document.getElementById('items')
 let i = 1
 
