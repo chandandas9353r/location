@@ -37,6 +37,8 @@ function getLocation(){
         console.log(fTime)
         return
     }
+    
+    const options = {enableHighAccuracy: true};
 
     let date = new Date().getDate().toString()
     let month = new Date().getMonth()+1
@@ -66,6 +68,6 @@ function getLocation(){
         list.append(longitude)
         storedB(currentDate,latitude.innerText.slice(10).trim(),longitude.innerText.slice(10).trim(),currentTime)
         i++
-    })
+    },null,options)
 
 }
